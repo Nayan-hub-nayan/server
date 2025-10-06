@@ -8,11 +8,15 @@ const contact = async(req, res) => {
     //validate the contact data
     const validationResult = validateContact(msg); //function to validate the contact data
     //if validation fails, send error response
-    
-    // Destructure name, email, phoneno, and message from the request body
-    const {name,email,phoneno,message} = msg;
-    const newContact = await contactModel.create({name,email,phoneno,message})
-    res.status(200).json({contact:newContact , msg: "Message sent successfully" });
+    if(!validationResult.success){
+      
+      return res.status(400).json({msg:"Validation failed", error: validationResult.err, success: false});
+    }
+    console.log(validationResult);
+    // Destructure name, email, number, and message from the request body
+    const {name,email,number,message} = msg;
+    const newContact = await contactModel.create({name,email,number,message})
+    res.status(200).json({contact:newContact ,success: true, msg: "Message sent successfully" });
     console.log("Message sent successfully");
   } catch (error) {
     res.status(500).json({ msg: "Server error" });

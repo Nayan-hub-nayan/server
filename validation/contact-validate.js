@@ -5,7 +5,11 @@ const {z} = require('zod');
 const contactValidate = z.object({
     name: z.string().min(2, "Name must be at least 2 characters long"),
     email: z.string().email("Invalid email address"),
-    phoneno: z.string("must be a number").min(10, "Phone number must be at least 10 digits long").max(10, "Phone number must be at most 15 digits long"),
+    number: z
+        .string()
+        .min(10, "Phone number must be at least 10 digits long")
+        .max(15, "Phone number must be at most 15 digits long")
+        .regex(/^\d+$/, "Phone number must contain only digits"),
     message: z.string().min(10, "Message must be at least 10 characters long").max(500, "Message must be at most 500 characters long"),
 })
 const validateContact = (data) => {

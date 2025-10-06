@@ -6,8 +6,18 @@ const { addservice } = require('./controlers/service');
 const { contact } = require('./controlers/contact');
 const serviceModel = require("./models/service-model");
 const contactModel = require("./models/contact-model")
-
+const cors = require("cors")
 const app = express();
+
+// ✅ Allow CORS
+app.use(
+  cors({
+    origin: ["http://localhost:3000", "https://your-frontend-domain.vercel.app"],
+    methods: ["GET", "POST"],
+    allowedHeaders: ["Content-Type"],
+  })
+)
+
 connectDB();
 app.use(express.json());
 
