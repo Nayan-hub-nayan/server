@@ -10,7 +10,7 @@ const contactValidate = z.object({
 })
 const validateContact = (data) => {
     try {
-        result= serviceValidate.parse(data)
+        result= contactValidate.parse(data)
         return { success: true, data: result };
     } catch (error) {
         msg = error.message
