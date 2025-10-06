@@ -51,7 +51,7 @@ app.get("/api/service/:id", async (req, res) => {
 app.post("/contact", contact);
 app.get("/api/contact", async (req, res) => {
   try {
-    const contact = await contactMadel.find();
+    const contact = await contactModel;
     res.json(contact);
   } catch (err) {
     res.status(500).json({ error: err.message });
